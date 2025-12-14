@@ -1,0 +1,53 @@
+{
+  "expo": {
+    "name": "MakerTest",
+    "slug": "makertest-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./src/assets/logo.jpg",
+    "splash": {
+      "image": "./src/assets/logo.jpg",
+      "resizeMode": "contain",
+      "backgroundColor": "#2E7D32"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTabletMode": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/logo.jpg",
+        "backgroundColor": "#2E7D32"
+      },
+      "package": "com.makertest.soilanalysis",
+      "versionCode": 1
+    },
+    "web": {
+      "favicon": "./src/assets/logo.jpg"
+    },
+    "description": "Advanced Soil Analysis & Agricultural Advisory System for South Sudan",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "primaryColor": "#2E7D32",
+    "plugins": [
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "compileSdkVersion": 33,
+            "targetSdkVersion": 33,
+            "buildToolsVersion": "33.0.0"
+          }
+        }
+      ]
+    ]
+  }
+}

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soil Analysis App - Web Version</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+                'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+                sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background-color: #f8fafc;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            min-height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            margin: -20px -20px 20px -20px;
+            border-radius: 0 0 20px 20px;
+        }
+        .title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .subtitle {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .nav-item {
+            padding: 10px 20px;
+            background-color: #2E7D32;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .nav-item:hover {
+            background-color: #1B5E20;
+        }
+        .nav-item.active {
+            background-color: #4CAF50;
+        }
+        .content {
+            padding: 20px 0;
+        }
+        .card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2E7D32;
+            margin: 0 0 10px 0;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        .label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        .input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .button {
+            background-color: #2E7D32;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #1B5E20;
+        }
+        .result {
+            background-color: #e8f5e8;
+            border: 1px solid #4CAF50;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        .auth-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            min-height: 100vh;
+        }
+        .auth-header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #2E7D32, #4CAF50);
+            color: white;
+            margin: -20px -20px 30px -20px;
+            border-radius: 0 0 20px 20px;
+        }
+        .auth-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+        }
+        .auth-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+        }
+        .auth-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #2E7D32;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .auth-link:hover {
+            color: #1B5E20;
+        }
+        .error-message {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .success-message {
+            background-color: #e8f5e8;
+            color: #2e7d32;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        .user-info {
+            background-color: #e3f2fd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .logout-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .logout-btn:hover {
+            background-color: #d32f2f;
+        }
+        .weather-container {
+            padding: 20px 0;
+        }
+        .weather-card {
+            background: linear-gradient(135deg, #2196F3, #4CAF50);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .weather-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .weather-temp {
+            font-size: 48px;
+            font-weight: bold;
+        }
+        .weather-location {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+        .weather-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .weather-detail {
+            background: rgba(255,255,255,0.2);
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .weather-detail-label {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        .weather-detail-value {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .map-container {
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            position: relative;
+            cursor: pointer;
+        }
+        .map-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #1565c0;
+            font-weight: 500;
+        }
+        .map-placeholder svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 10px;
+        }
+        .location-marker {
+            position: absolute;
+            background: #f44336;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        .weather-forecast {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        .forecast-day {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            min-width: 80px;
+        }
+        .forecast-day-name {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        .forecast-temp {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2E7D32;
+        }
+        .real-time-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #4CAF50;
+            border-radius: 50%;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        .location-input {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .location-input input {
+            flex: 1;
+        }
+        .refresh-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .refresh-btn:hover {
+            background: #1976D2;
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const API_BASE_URL = 'http://localhost:3001/api';
+        const WEATHER_API_KEY = 'YOUR_OPENWEATHER_API_KEY'; // Replace with actual API key
+        const SOUTH_SUDAN_BOUNDS = {
+            north: 12.5,
+            south: 3.5,
+            east: 36.0,
+            west: 24.0
+        };
+
+        const App = () => {
+            const [isAuthenticated, setIsAuthenticated] = useState(false);
+            const [currentUser, setCurrentUser] = useState(null);
+            const [authView, setAuthView] = useState('login');
+            const [activeTab, setActiveTab] = useState('weather');
+            const [loading, setLoading] = useState(false);
+            const [authError, setAuthError] = useState('');
+            const [authSuccess, setAuthSuccess] = useState('');
+            
+            // Weather state
+            const [weatherData, setWeatherData] = useState(null);
+            const [weatherForecast, setWeatherForecast] = useState([]);
+            const [selectedLocation, setSelectedLocation] = useState({ lat: 7.5, lng: 30.0 }); // Center of South Sudan
+            const [locationInput, setLocationInput] = useState('Juba, South Sudan');
+            const [weatherSocket, setWeatherSocket] = useState(null);
+            const [lastUpdate, setLastUpdate] = useState(null);
+            const [mapClickPosition, setMapClickPosition] = useState(null);
+            
+            const [loginData, setLoginData] = useState({
+                email: '',
+                password: ''
+            });
+            
+            const [signupData, setSignupData] = useState({
+                name: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+                farmName: '',
+                location: ''
+            });
+            
+            const [soilData, setSoilData] = useState({
+                ph: '',
+                nitrogen: '',
+                phosphorus: '',
+                potassium: '',
+                moisture: '',
+                location: ''
+            });
+            const [analysisResult, setAnalysisResult] = useState(null);
+
+            // Check if user is already logged in on app load
+            useEffect(() => {
+                const token = localStorage.getItem('token');
+                const user = localStorage.getItem('user');
+                if (token && user) {
+                    setCurrentUser(JSON.parse(user));
+                    setIsAuthenticated(true);
+                }
+            }, []);
+
+            // Initialize WebSocket for real-time weather updates
+            useEffect(() => {
+                if (isAuthenticated && !weatherSocket) {
+                    const ws = new WebSocket('ws://localhost:3001/weather');
+                    
+                    ws.onopen = () => {
+                        console.log('Weather WebSocket connected');
+                        setWeatherSocket(ws);
+                    };
+                    
+                    ws.onmessage = (event) => {
+                        const data = JSON.parse(event.data);
+                        if (data.type === 'weather_update') {
+                            setWeatherData(data.weatherData);
+                            setLastUpdate(new Date());
+                        }
+                    };
+                    
+                    ws.onerror = (error) => {
+                        console.error('WebSocket error:', error);
+                    };
+                    
+                    ws.onclose = () => {
+                        console.log('Weather WebSocket disconnected');
+                        setWeatherSocket(null);
+                    };
+                    
+                    return () => {
+                        if (ws.readyState === WebSocket.OPEN) {
+                            ws.close();
+                        }
+                    };
+                }
+            }, [isAuthenticated, weatherSocket]);
+
+            // Fetch weather data
+            useEffect(() => {
+                if (isAuthenticated && selectedLocation) {
+                    fetchWeatherData();
+                }
+            }, [isAuthenticated, selectedLocation]);
+
+            const handleMapClick = (event) => {
+                const rect = event.currentTarget.getBoundingClientRect();
+                const x = event.clientX - rect.left;
+                const y = event.clientY - rect.top;
+                
+                // Convert click position to lat/lng (mock calculation)
+                const lat = 3.5 + (y / rect.height) * 9; // South Sudan bounds
+                const lng = 24.0 + (x / rect.width) * 12;
+                
+                setSelectedLocation({ lat, lng });
+                setMapClickPosition({ x, y });
+                reverseGeocode(lat, lng);
+                fetchWeatherData();
+            };
+
+            const fetchWeatherData = async () => {
+                setLoading(true);
+                try {
+                    // Mock weather data for South Sudan (replace with real API call)
+                    const mockWeatherData = {
+                        location: locationInput,
+                        temperature: Math.round(25 + Math.random() * 10),
+                        humidity: Math.round(60 + Math.random() * 30),
+                        windSpeed: Math.round(5 + Math.random() * 15),
+                        pressure: Math.round(1000 + Math.random() * 30),
+                        visibility: Math.round(8 + Math.random() * 4),
+                        uvIndex: Math.round(5 + Math.random() * 5),
+                        condition: ['Sunny', 'Partly Cloudy', 'Cloudy', 'Light Rain'][Math.floor(Math.random() * 4)],
+                        lastUpdate: new Date().toISOString()
+                    };
+
+                    setWeatherData(mockWeatherData);
+                    setLastUpdate(new Date());
+
+                    // Generate mock forecast
+                    const forecast = [];
+                    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
+                    for (let i = 0; i < 5; i++) {
+                        forecast.push({
+                            day: days[i],
+                            high: Math.round(28 + Math.random() * 8),
+                            low: Math.round(18 + Math.random() * 8),
+                            condition: ['Sunny', 'Cloudy', 'Rainy'][Math.floor(Math.random() * 3)]
+                        });
+                    }
+                    setWeatherForecast(forecast);
+
+                } catch (error) {
+                    console.error('Error fetching weather data:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            const reverseGeocode = async (lat, lng) => {
+                // Mock reverse geocoding for South Sudan locations
+                const locations = ['Juba', 'Wau', 'Malakal', 'Bor', 'Yei', 'Yambio'];
+                const randomLocation = locations[Math.floor(Math.random() * locations.length)];
+                setLocationInput(`${randomLocation}, South Sudan`);
+            };
+
+            const handleLocationSearch = () => {
+                // Mock geocoding for South Sudan locations
+                const locations = {
+                    'juba': { lat: 4.85, lng: 31.6 },
+                    'wau': { lat: 7.70, lng: 28.00 },
+                    'malakal': { lat: 9.55, lng: 31.65 },
+                    'bor': { lat: 6.22, lng: 31.57 },
+                    'yei': { lat: 4.10, lng: 30.68 },
+                    'yambio': { lat: 4.10, lng: 28.40 }
+                };
+                
+                const searchLower = locationInput.toLowerCase();
+                let foundLocation = null;
+                
+                for (const [city, coords] of Object.entries(locations)) {
+                    if (searchLower.includes(city)) {
+                        foundLocation = coords;
+                        break;
+                    }
+                }
+                
+                if (foundLocation) {
+                    setSelectedLocation(foundLocation);
+                    setMapClickPosition({ 
+                        x: ((foundLocation.lng - 24.0) / 12) * 100, 
+                        y: ((foundLocation.lat - 3.5) / 9) * 100 
+                    });
+                } else {
+                    // Default to random location in South Sudan
+                    setSelectedLocation({ 
+                        lat: 3.5 + Math.random() * 9, 
+                        lng: 24.0 + Math.random() * 12 
+                    });
+                }
+                
+                fetchWeatherData();
+            };
+
+            const refreshWeather = () => {
+                fetchWeatherData();
+            };
+
+            const handleLoginChange = (field, value) => {
+                setLoginData(prev => ({
+                    ...prev,
+                    [field]: value
+                }));
+            };
+
+            const handleSignupChange = (field, value) => {
+                setSignupData(prev => ({
+                    ...prev,
+                    [field]: value
+                }));
+            };
+
+            const handleLogin = async (e) => {
+                e.preventDefault();
+                setAuthError('');
+                setLoading(true);
+                
+                try {
+                    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(loginData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        setCurrentUser(data.user);
+                        setIsAuthenticated(true);
+                        setAuthSuccess('Login successful!');
+                        setTimeout(() => setAuthSuccess(''), 3000);
+                    } else {
+                        setAuthError(data.message || 'Login failed');
+                    }
+                } catch (error) {
+                    setAuthError('Network error. Please try again.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            const handleSignup = async (e) => {
+                e.preventDefault();
+                setAuthError('');
+                
+                if (signupData.password !== signupData.confirmPassword) {
+                    setAuthError('Passwords do not match');
+                    return;
+                }
+                
+                setLoading(true);
+                
+                try {
+                    const { confirmPassword, ...userData } = signupData;
+                    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(userData)
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok) {
+                        localStorage.setItem('token', data.token);
+                        localStorage.setItem('user', JSON.stringify(data.user));
+                        setCurrentUser(data.user);
+                        setIsAuthenticated(true);
+                        setAuthSuccess('Registration successful!');
+                        setTimeout(() => setAuthSuccess(''), 3000);
+                    } else {
+                        setAuthError(data.message || 'Registration failed');
+                    }
+                } catch (error) {
+                    setAuthError('Network error. Please try again.');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            const handleLogout = () => {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                setCurrentUser(null);
+                setIsAuthenticated(false);
+                setAuthView('login');
+                setLoginData({ email: '', password: '' });
+                setSignupData({ name: '', email: '', password: '', confirmPassword: '', farmName: '', location: '' });
+            };
+
+            const handleInputChange = (field, value) => {
+                setSoilData(prev => ({
+                    ...prev,
+                    [field]: value
+                }));
+            };
+
+            const analyzeSoil = async () => {
+                setLoading(true);
+                // Simulate API call
+                setTimeout(() => {
+                    const mockResult = {
+                        soilHealth: 'Good',
+                        recommendations: [
+                            'Add nitrogen-rich fertilizer for better crop yield',
+                            'Maintain current moisture levels',
+                            'Consider adding organic matter to improve soil structure'
+                        ],
+                        suitableCrops: ['Maize', 'Sorghum', 'Millet'],
+                        estimatedYield: '2.5 - 3.0 tons/hectare'
+                    };
+                    setAnalysisResult(mockResult);
+                    setLoading(false);
+                }, 2000);
+            };
+
+            const renderAuthForm = () => {
+                if (authView === 'login') {
+                    return (
+                        <div className="auth-container">
+                            <div className="auth-header">
+                                <h1 className="auth-title">Welcome Back</h1>
+                                <p className="auth-subtitle">Login to your soil analysis account</p>
+                            </div>
+                            
+                            {authError && <div className="error-message">{authError}</div>}
+                            {authSuccess && <div className="success-message">{authSuccess}</div>}
+                            
+                            <form className="auth-form" onSubmit={handleLogin}>
+                                <div className="input-group">
+                                    <label className="label">Email</label>
+                                    <input
+                                        type="email"
+                                        className="input"
+                                        placeholder="Enter your email"
+                                        value={loginData.email}
+                                        onChange={(e) => handleLoginChange('email', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Password</label>
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        placeholder="Enter your password"
+                                        value={loginData.password}
+                                        onChange={(e) => handleLoginChange('password', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="button" disabled={loading}>
+                                    {loading ? 'Logging in...' : 'Login'}
+                                </button>
+                            </form>
+                            
+                            <div className="auth-link" onClick={() => setAuthView('signup')}>
+                                Don't have an account? Sign up
+                            </div>
+                        </div>
+                    );
+                } else {
+                    return (
+                        <div className="auth-container">
+                            <div className="auth-header">
+                                <h1 className="auth-title">Create Account</h1>
+                                <p className="auth-subtitle">Join our soil analysis platform</p>
+                            </div>
+                            
+                            {authError && <div className="error-message">{authError}</div>}
+                            {authSuccess && <div className="success-message">{authSuccess}</div>}
+                            
+                            <form className="auth-form" onSubmit={handleSignup}>
+                                <div className="input-group">
+                                    <label className="label">Full Name</label>
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        placeholder="Enter your full name"
+                                        value={signupData.name}
+                                        onChange={(e) => handleSignupChange('name', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Email</label>
+                                    <input
+                                        type="email"
+                                        className="input"
+                                        placeholder="Enter your email"
+                                        value={signupData.email}
+                                        onChange={(e) => handleSignupChange('email', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Password</label>
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        placeholder="Create a password"
+                                        value={signupData.password}
+                                        onChange={(e) => handleSignupChange('password', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Confirm Password</label>
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        placeholder="Confirm your password"
+                                        value={signupData.confirmPassword}
+                                        onChange={(e) => handleSignupChange('confirmPassword', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Farm Name (Optional)</label>
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        placeholder="Enter your farm name"
+                                        value={signupData.farmName}
+                                        onChange={(e) => handleSignupChange('farmName', e.target.value)}
+                                    />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Location</label>
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        placeholder="e.g., Juba, South Sudan"
+                                        value={signupData.location}
+                                        onChange={(e) => handleSignupChange('location', e.target.value)}
+                                        required
+                                    />
+                                </div>
+                                <button type="submit" className="button" disabled={loading}>
+                                    {loading ? 'Creating account...' : 'Sign Up'}
+                                </button>
+                            </form>
+                            
+                            <div className="auth-link" onClick={() => setAuthView('login')}>
+                                Already have an account? Login
+                            </div>
+                        </div>
+                    );
+                }
+            };
+
+            const renderContent = () => {
+                switch (activeTab) {
+                    case 'weather':
+                        return (
+                            <div className="weather-container">
+                                <div className="location-input">
+                                    <input
+                                        type="text"
+                                        className="input"
+                                        placeholder="Enter location in South Sudan"
+                                        value={locationInput}
+                                        onChange={(e) => setLocationInput(e.target.value)}
+                                    />
+                                    <button className="refresh-btn" onClick={handleLocationSearch}>
+                                        Search
+                                    </button>
+                                    <button className="refresh-btn" onClick={refreshWeather}>
+                                        Refresh
+                                    </button>
+                                </div>
+
+                                <div className="map-container" id="weather-map" onClick={handleMapClick}>
+                                    <div className="map-placeholder">
+                                        <svg viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5zm0 3.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5z"/>
+                                        </svg>
+                                        <div>South Sudan Map</div>
+                                        <div style={{fontSize: '14px', marginTop: '5px'}}>Click to select location</div>
+                                    </div>
+                                    {mapClickPosition && (
+                                        <div 
+                                            className="location-marker" 
+                                            style={{ 
+                                                left: `${mapClickPosition.x}%`, 
+                                                top: `${mapClickPosition.y}%`,
+                                                transform: 'translate(-50%, -50%)'
+                                            }}
+                                        >
+                                            {locationInput.split(',')[0]}
+                                        </div>
+                                    )}
+                                </div>
+
+                                {weatherData && (
+                                    <div className="weather-card">
+                                        <div className="weather-header">
+                                            <div>
+                                                <div className="weather-location">
+                                                    {weatherData.location}
+                                                    <span className="real-time-indicator"></span>
+                                                </div>
+                                                <div className="weather-temp">{weatherData.temperature}°C</div>
+                                                <div>{weatherData.condition}</div>
+                                            </div>
+                                            <div>
+                                                <div style={{fontSize: '12px', opacity: 0.8}}>
+                                                    Last updated: {lastUpdate ? lastUpdate.toLocaleTimeString() : 'N/A'}
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="weather-details">
+                                            <div className="weather-detail">
+                                                <div className="weather-detail-label">Humidity</div>
+                                                <div className="weather-detail-value">{weatherData.humidity}%</div>
+                                            </div>
+                                            <div className="weather-detail">
+                                                <div className="weather-detail-label">Wind Speed</div>
+                                                <div className="weather-detail-value">{weatherData.windSpeed} km/h</div>
+                                            </div>
+                                            <div className="weather-detail">
+                                                <div className="weather-detail-label">Pressure</div>
+                                                <div className="weather-detail-value">{weatherData.pressure} hPa</div>
+                                            </div>
+                                            <div className="weather-detail">
+                                                <div className="weather-detail-label">UV Index</div>
+                                                <div className="weather-detail-value">{weatherData.uvIndex}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
+                                {weatherForecast.length > 0 && (
+                                    <div className="card">
+                                        <h3 className="card-title">5-Day Forecast</h3>
+                                        <div className="weather-forecast">
+                                            {weatherForecast.map((day, index) => (
+                                                <div key={index} className="forecast-day">
+                                                    <div className="forecast-day-name">{day.day}</div>
+                                                    <div className="forecast-temp">{day.high}°/{day.low}°</div>
+                                                    <div style={{fontSize: '12px', color: '#666'}}>{day.condition}</div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
+
+                                <div className="card">
+                                    <h3 className="card-title">Agricultural Recommendations</h3>
+                                    <div style={{color: '#2E7D32'}}>
+                                        <p>• Current conditions are suitable for planting maize and sorghum</p>
+                                        <p>• Moderate humidity levels - monitor for fungal diseases</p>
+                                        <p>• UV index is high - ensure proper irrigation</p>
+                                        <p>• Wind conditions are favorable for pesticide application</p>
+                                    </div>
+                                </div>
+                            </div>
+                        );
+
+                    case 'analysis':
+                        return (
+                            <div>
+                                <div className="card">
+                                    <h3 className="card-title">Soil Analysis</h3>
+                                    <div className="input-group">
+                                        <label className="label">pH Level</label>
+                                        <input
+                                            type="number"
+                                            className="input"
+                                            placeholder="e.g., 6.5"
+                                            value={soilData.ph}
+                                            onChange={(e) => handleInputChange('ph', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="input-group">
+                                        <label className="label">Nitrogen (mg/kg)</label>
+                                        <input
+                                            type="number"
+                                            className="input"
+                                            placeholder="e.g., 25"
+                                            value={soilData.nitrogen}
+                                            onChange={(e) => handleInputChange('nitrogen', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="input-group">
+                                        <label className="label">Phosphorus (mg/kg)</label>
+                                        <input
+                                            type="number"
+                                            className="input"
+                                            placeholder="e.g., 15"
+                                            value={soilData.phosphorus}
+                                            onChange={(e) => handleInputChange('phosphorus', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="input-group">
+                                        <label className="label">Potassium (mg/kg)</label>
+                                        <input
+                                            type="number"
+                                            className="input"
+                                            placeholder="e.g., 30"
+                                            value={soilData.potassium}
+                                            onChange={(e) => handleInputChange('potassium', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="input-group">
+                                        <label className="label">Moisture (%)</label>
+                                        <input
+                                            type="number"
+                                            className="input"
+                                            placeholder="e.g., 25"
+                                            value={soilData.moisture}
+                                            onChange={(e) => handleInputChange('moisture', e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="input-group">
+                                        <label className="label">Location</label>
+                                        <input
+                                            type="text"
+                                            className="input"
+                                            placeholder="e.g., Juba, South Sudan"
+                                            value={soilData.location}
+                                            onChange={(e) => handleInputChange('location', e.target.value)}
+                                        />
+                                    </div>
+                                    <button className="button" onClick={analyzeSoil}>
+                                        {loading ? 'Analyzing...' : 'Analyze Soil'}
+                                    </button>
+                                </div>
+
+                                {analysisResult && (
+                                    <div className="card">
+                                        <h3 className="card-title">Analysis Results</h3>
+                                        <div className="result">
+                                            <p><strong>Soil Health:</strong> {analysisResult.soilHealth}</p>
+                                            <p><strong>Estimated Yield:</strong> {analysisResult.estimatedYield}</p>
+                                            <p><strong>Recommendations:</strong></p>
+                                            <ul>
+                                                {analysisResult.recommendations.map((rec, index) => (
+                                                    <li key={index}>{rec}</li>
+                                                ))}
+                                            </ul>
+                                            <p><strong>Suitable Crops:</strong> {analysisResult.suitableCrops.join(', ')}</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        );
+
+                    case 'history':
+                        return (
+                            <div className="card">
+                                <h3 className="card-title">Analysis History</h3>
+                                <p>No previous analysis records found. Your first analysis will appear here.</p>
+                            </div>
+                        );
+
+                    case 'profile':
+                        return (
+                            <div className="card">
+                                <h3 className="card-title">Farm Profile</h3>
+                                <div className="input-group">
+                                    <label className="label">Farm Name</label>
+                                    <input type="text" className="input" placeholder="Enter your farm name" />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Farm Size (hectares)</label>
+                                    <input type="number" className="input" placeholder="e.g., 5" />
+                                </div>
+                                <div className="input-group">
+                                    <label className="label">Primary Crops</label>
+                                    <input type="text" className="input" placeholder="e.g., Maize, Sorghum" />
+                                </div>
+                                <button className="button">Save Profile</button>
+                            </div>
+                        );
+
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <div>
+                    {!isAuthenticated ? (
+                        renderAuthForm()
+                    ) : (
+                        <div className="container">
+                            <div className="header">
+                                <h1 className="title">Soil Analysis App</h1>
+                                <p className="subtitle">Advanced Agricultural Advisory System</p>
+                                {currentUser && (
+                                    <div className="user-info" style={{background: 'rgba(255,255,255,0.2)', margin: '10px', padding: '10px', borderRadius: '5px'}}>
+                                        Welcome, {currentUser.name}!
+                                        <button className="logout-btn" onClick={handleLogout} style={{marginLeft: '10px'}}>
+                                            Logout
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="nav-container">
+                                <button 
+                                    className={`nav-item ${activeTab === 'weather' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('weather')}
+                                >
+                                    Weather
+                                </button>
+                                <button 
+                                    className={`nav-item ${activeTab === 'analysis' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('analysis')}
+                                >
+                                    Analysis
+                                </button>
+                                <button 
+                                    className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('history')}
+                                >
+                                    History
+                                </button>
+                                <button 
+                                    className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('profile')}
+                                >
+                                    Profile
+                                </button>
+                            </div>
+
+                            <div className="content">
+                                {loading ? (
+                                    <div className="loading">
+                                        <p>Analyzing soil data...</p>
+                                    </div>
+                                ) : (
+                                    renderContent()
+                                )}
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>

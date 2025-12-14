@@ -1,0 +1,181 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.makertest.app"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <!-- Bluetooth permissions -->
+12    <uses-permission android:name="android.permission.BLUETOOTH" />
+12-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:6:5-68
+12-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:6:22-65
+13    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+13-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:7:5-74
+13-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:7:22-71
+14    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+14-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:8:5-76
+14-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:8:22-73
+15    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+15-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:9:5-73
+15-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:9:22-70
+16
+17    <!-- Location permissions (required for Bluetooth scanning) -->
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:12:5-79
+18-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:12:22-76
+19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+19-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:13:5-81
+19-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:13:22-78
+20
+21    <!-- Network permissions -->
+22    <uses-permission android:name="android.permission.INTERNET" />
+22-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:16:5-67
+22-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:16:22-64
+23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+23-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:17:5-79
+23-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:17:22-76
+24
+25    <!-- Storage permissions -->
+26    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+26-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:20:5-80
+26-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:20:22-77
+27    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+27-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:21:5-81
+27-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:21:22-78
+28
+29    <permission
+29-->[androidx.core:core:1.12.0] C:\Users\Hp\.gradle\caches\transforms-3\3420f0c6eec6269ab9f00a01fee740e5\transformed\core-1.12.0\AndroidManifest.xml:22:5-24:47
+30        android:name="com.makertest.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+30-->[androidx.core:core:1.12.0] C:\Users\Hp\.gradle\caches\transforms-3\3420f0c6eec6269ab9f00a01fee740e5\transformed\core-1.12.0\AndroidManifest.xml:23:9-81
+31        android:protectionLevel="signature" />
+31-->[androidx.core:core:1.12.0] C:\Users\Hp\.gradle\caches\transforms-3\3420f0c6eec6269ab9f00a01fee740e5\transformed\core-1.12.0\AndroidManifest.xml:24:9-44
+32
+33    <uses-permission android:name="com.makertest.app.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+33-->[androidx.core:core:1.12.0] C:\Users\Hp\.gradle\caches\transforms-3\3420f0c6eec6269ab9f00a01fee740e5\transformed\core-1.12.0\AndroidManifest.xml:26:5-97
+33-->[androidx.core:core:1.12.0] C:\Users\Hp\.gradle\caches\transforms-3\3420f0c6eec6269ab9f00a01fee740e5\transformed\core-1.12.0\AndroidManifest.xml:26:22-94
+34
+35    <application
+35-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:23:5-51:19
+36        android:name="com.makertest.app.MakerTestApplication"
+36-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:24:9-45
+37        android:allowBackup="true"
+37-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:25:9-35
+38        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+38-->[androidx.core:core:1.12.0] C:\Users\Hp\.gradle\caches\transforms-3\3420f0c6eec6269ab9f00a01fee740e5\transformed\core-1.12.0\AndroidManifest.xml:28:18-86
+39        android:dataExtractionRules="@xml/data_extraction_rules"
+39-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:26:9-65
+40        android:debuggable="true"
+41        android:extractNativeLibs="false"
+42        android:fullBackupContent="@xml/backup_rules"
+42-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:27:9-54
+43        android:icon="@mipmap/ic_launcher"
+43-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:28:9-43
+44        android:label="@string/app_name"
+44-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:29:9-41
+45        android:roundIcon="@mipmap/ic_launcher_round"
+45-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:30:9-54
+46        android:supportsRtl="true"
+46-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:31:9-35
+47        android:theme="@style/Theme.MakerTest" >
+47-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:32:9-47
+48        <activity
+48-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:35:9-43:20
+49            android:name="com.makertest.app.MainActivity"
+49-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:36:13-41
+50            android:exported="true"
+50-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:37:13-36
+51            android:theme="@style/Theme.MakerTest" >
+51-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:38:13-51
+52            <intent-filter>
+52-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:39:13-42:29
+53                <action android:name="android.intent.action.MAIN" />
+53-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:40:17-69
+53-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:40:25-66
+54
+55                <category android:name="android.intent.category.LAUNCHER" />
+55-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:41:17-77
+55-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:41:27-74
+56            </intent-filter>
+57        </activity>
+58
+59        <!-- Bluetooth service for background communication -->
+60        <service
+60-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:46:9-49:40
+61            android:name="com.makertest.app.service.BluetoothService"
+61-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:47:13-53
+62            android:enabled="true"
+62-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:48:13-35
+63            android:exported="false" />
+63-->C:\Users\Hp\OneDrive\Desktop\makertest-app\android\app\src\main\AndroidManifest.xml:49:13-37
+64
+65        <provider
+65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+66            android:name="androidx.startup.InitializationProvider"
+66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+67            android:authorities="com.makertest.app.androidx-startup"
+67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+68            android:exported="false" >
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
+69            <meta-data
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+70                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
+71                android:value="androidx.startup" />
+71-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Hp\.gradle\caches\transforms-3\9ab3ccc5038fec3f3e3f0652a145917d\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+72            <meta-data
+72-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\Hp\.gradle\caches\transforms-3\e01ca23c4252a9bc567e1033c39fe19d\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+73                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+73-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\Hp\.gradle\caches\transforms-3\e01ca23c4252a9bc567e1033c39fe19d\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+74                android:value="androidx.startup" />
+74-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\Hp\.gradle\caches\transforms-3\e01ca23c4252a9bc567e1033c39fe19d\transformed\lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+75            <meta-data
+75-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+76                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+76-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+77                android:value="androidx.startup" />
+77-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+78        </provider>
+79
+80        <receiver
+80-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+81            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+81-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+82            android:directBootAware="false"
+82-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+83            android:enabled="true"
+83-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+84            android:exported="true"
+84-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+85            android:permission="android.permission.DUMP" >
+85-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+86            <intent-filter>
+86-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+87                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+88            </intent-filter>
+89            <intent-filter>
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+90                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+91            </intent-filter>
+92            <intent-filter>
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+93                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+94            </intent-filter>
+95            <intent-filter>
+95-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+96                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\Hp\.gradle\caches\transforms-3\3fb69a915f2624b788b92b4915b30153\transformed\profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+97            </intent-filter>
+98        </receiver>
+99    </application>
+100
+101</manifest>
